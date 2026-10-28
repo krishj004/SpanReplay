@@ -1,5 +1,5 @@
 {
-  "name": "@spanreplay/observability-sdk",
+  "name": "@scanreplay/observability-sdk",
   "version": "0.1.0",
   "private": true,
   "type": "module",

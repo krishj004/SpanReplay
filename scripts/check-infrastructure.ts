@@ -67,7 +67,7 @@ for (const resource of ["datadog_monitor", "datadog_logs_custom_pipeline", "data
 
 const alertingRules = await readFile("observability/alerting.rules.yml", "utf8");
 for (const required of [
-  "SpanReplayAvailabilityBudgetFastBurn",
+  "ScanReplayAvailabilityBudgetFastBurn",
   "[5m]",
   "[1h]",
   "14.4 * 0.01",

@@ -15,7 +15,7 @@ afterEach(async () => {
 
 describe("ReplayStore", () => {
   it("rejects path-like identifiers and writes replay evidence with owner-only permissions", async () => {
-    const directory = await mkdtemp(path.join(os.tmpdir(), "spanreplay-store-"));
+    const directory = await mkdtemp(path.join(os.tmpdir(), "scanreplay-store-"));
     directories.push(directory);
     const traceId = "d".repeat(32);
     const store = new ReplayStore(directory);

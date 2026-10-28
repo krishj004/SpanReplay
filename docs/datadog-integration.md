@@ -2,11 +2,11 @@
 
 ## Verified trial result
 
-The protected workflow passed against a real Datadog US1 trial organization on August 10, 2026. [Workflow run #31409061260](https://github.com/krishj004/SpanReplay/actions/runs/31409061260) observed all four signals through Datadog's APIs:
+The protected workflow passed against a real Datadog US1 trial organization on August 10, 2026. [Workflow run #31409061260](https://github.com/krishj004/ScanReplay/actions/runs/31409061260) observed all four signals through Datadog's APIs:
 
 - one indexed trace containing `api-gateway`, `agent-service`, and `retrieval-service`;
 - 8 structured logs correlated to the trace;
-- 1 `spanreplay.workflow.total` metric series tagged for the verification environment; and
+- 1 `scanreplay.workflow.total` metric series tagged for the verification environment; and
 - 2 grouped backend Error Tracking issues.
 
 The workflow uploaded a digest-addressed 30-day artifact and the assertion output is checked in at [`evidence/datadog-verification.json`](../evidence/datadog-verification.json). The checked-in file contains trace identifiers and counts, never API or application keys.

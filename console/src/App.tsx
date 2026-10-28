@@ -167,8 +167,8 @@ export default function App() {
   return (
     <main>
       <header>
-        <a className="brand" href="#top"><span>S</span>SpanReplay <em>v0.1</em></a>
-        <nav><a href="#trace">Trace</a><a href="#signals">Signals</a><a href="#replay">Replay</a><a href="https://github.com/krishj004/SpanReplay" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
+        <a className="brand" href="#top"><span>S</span>ScanReplay <em>v0.1</em></a>
+        <nav><a href="#trace">Trace</a><a href="#signals">Signals</a><a href="#replay">Replay</a><a href="https://github.com/krishj004/ScanReplay" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
       </header>
 
       <section className="hero" id="top">
@@ -187,7 +187,7 @@ export default function App() {
         <article className="trace-card">
           <div className="card-head"><div><p>Distributed workflow trace</p><code>{result.traceId}</code></div><span className={`status ${result.status}`}>{statusLabel(result.status)}</span></div>
           <div className="waterfall">
-            <div className="root"><span>api-gateway</span><strong>spanreplay.workflow</strong><time>{totalLatency + 18} ms</time></div>
+            <div className="root"><span>api-gateway</span><strong>scanreplay.workflow</strong><time>{totalLatency + 18} ms</time></div>
             {result.steps.map((step, index) => <div className={`step ${step.status}`} key={`${step.name}-${index}`}><i/><span>{step.service}</span><strong>{step.name}</strong><time>{step.durationMs} ms</time><div style={{width: `${Math.max(18, Math.min(90, step.durationMs / Math.max(totalLatency, 1) * 100))}%`}}/></div>)}
           </div>
           {result.failure ? <div className="failure"><b>{result.failure.category}</b><span>{result.failure.service} / {result.failure.step}</span><p>{result.failure.message}</p></div> : <div className="answer"><b>Grounded response</b><p>{result.answer}</p></div>}
@@ -201,7 +201,7 @@ export default function App() {
 
       <section className="replay" id="replay"><div><p className="eyebrow">Privacy-aware failure replay</p><h2>Turn an incident trace into a reproducible test.</h2><p>Re-execute the agent state machine with sanitized retrieval, model, and tool adapter fixtures. Compare status, tool path, validation, cost, and response changes.</p></div><button onClick={replay} disabled={loading}>Replay this trace</button>{comparison && <div className="diff"><span>ORIGINAL<br/><code>{comparison.originalTraceId.slice(0, 12)}…</code></span><b>→</b><span>REPLAYED<br/><code>{comparison.replayTraceId.slice(0, 12)}…</code></span><strong>{comparison.driftDetected ? "DRIFT DETECTED" : "REPRODUCED"}</strong></div>}</section>
 
-      <footer><span>SpanReplay</span><p>OpenTelemetry · Node.js · TypeScript · Datadog-compatible · Apache-2.0</p></footer>
+      <footer><span>ScanReplay</span><p>OpenTelemetry · Node.js · TypeScript · Datadog-compatible · Apache-2.0</p></footer>
     </main>
   );
 }

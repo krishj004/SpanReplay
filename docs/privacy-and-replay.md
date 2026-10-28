@@ -1,6 +1,6 @@
 # Privacy-aware replay
 
-Agent traces are valuable because they contain context; that same context can contain personal data, credentials, proprietary documents, or destructive tool arguments. SpanReplay therefore treats replay as a separate data product with a stricter contract than ordinary traces.
+Agent traces are valuable because they contain context; that same context can contain personal data, credentials, proprietary documents, or destructive tool arguments. ScanReplay therefore treats replay as a separate data product with a stricter contract than ordinary traces.
 
 ## Default policy
 

@@ -90,7 +90,7 @@ type GatewayReplayOptions = {
 };
 
 function hasValidApiKey(candidate: string | string[] | undefined): boolean {
-  const expected = process.env.SPANREPLAY_API_KEY;
+  const expected = process.env.SCANREPLAY_API_KEY;
   if (!expected) return true;
   if (typeof candidate !== "string") return false;
   const expectedBuffer = Buffer.from(expected);
@@ -173,11 +173,11 @@ export function buildGatewayServer(
         return reply.code(401).send({ error: error instanceof Error ? error.message : "Bearer token is invalid" });
       }
     }
-    if (hasValidApiKey(request.headers["x-spanreplay-api-key"])) {
+    if (hasValidApiKey(request.headers["x-scanreplay-api-key"])) {
       principals.set(request, localPrincipal);
       return;
     }
-    return reply.code(401).send({ error: "A valid x-spanreplay-api-key header is required" });
+    return reply.code(401).send({ error: "A valid x-scanreplay-api-key header is required" });
   });
 
   app.get("/health", async () => ({ status: "ok", service: "api-gateway" }));
@@ -198,7 +198,7 @@ export function buildGatewayServer(
     const principal = principalFor(request);
     const workflowRequest = { ...parsed.data, tenantId: principal.tenantId };
     const execution = await inSpan(
-      "spanreplay.workflow",
+      "scanreplay.workflow",
       {
         "gen_ai.operation.name": "invoke_agent",
         "gen_ai.agent.name": "incident-assistant",
@@ -271,7 +271,7 @@ export function buildGatewayServer(
     if (mode === "live" && record.privacy.contentRedacted) {
       return reply.code(409).send({
         error: "Live replay is unavailable because raw request content was not retained",
-        hint: "Use fixture replay, or explicitly set SPANREPLAY_REDACT_CONTENT=false in a non-sensitive demo environment.",
+        hint: "Use fixture replay, or explicitly set SCANREPLAY_REDACT_CONTENT=false in a non-sensitive demo environment.",
       });
     }
 
@@ -280,7 +280,7 @@ export function buildGatewayServer(
       const selectedCodeVersion = replayRequest.codeVersion
         ?? record.result.metadata.codeVersion
         ?? "0.1.0";
-      const deployedCodeVersion = process.env.SPANREPLAY_CODE_VERSION ?? "0.1.0";
+      const deployedCodeVersion = process.env.SCANREPLAY_CODE_VERSION ?? "0.1.0";
       const runners: Record<string, WorkflowRunner> = {
         "0.1.0": runAgent,
         current: runAgent,

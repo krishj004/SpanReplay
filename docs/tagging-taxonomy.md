@@ -10,7 +10,7 @@ Use a small, governed tag set so service maps, monitors, costs, and ownership re
 | `service` | `api-gateway`, `agent-service` | low |
 | `version` | release or commit | bounded |
 | `team` | `ai-platform` | low |
-| `platform` | `spanreplay` | one value |
+| `platform` | `scanreplay` | one value |
 
 ## AI workflow tags
 

@@ -22,7 +22,7 @@ processors:
   resource:
     attributes:
       - key: platform
-        value: spanreplay
+        value: scanreplay
         action: upsert
   batch:
     timeout: 2s
@@ -45,7 +45,7 @@ exporters:
       max_elapsed_time: 5m
   prometheus:
     endpoint: 0.0.0.0:8889
-    namespace: spanreplay
+    namespace: scanreplay
   debug:
     verbosity: basic
 

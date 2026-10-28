@@ -13,7 +13,7 @@ export async function startTelemetry(serviceName: string): Promise<void> {
     serviceName,
     serviceVersion: process.env.npm_package_version ?? "0.1.0",
     environment: process.env.DEPLOYMENT_ENVIRONMENT ?? process.env.NODE_ENV ?? "development",
-    namespace: "spanreplay",
+    namespace: "scanreplay",
     instanceId: process.env.HOSTNAME ?? `${serviceName}-local`,
     otlpEndpoint: endpoint,
     disabled: process.env.OTEL_SDK_DISABLED === "true",

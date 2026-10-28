@@ -7,8 +7,8 @@ import {
   type MetricAttributePolicy,
 } from "../../packages/observability-sdk/src/index.js";
 
-const tracer = trace.getTracer("spanreplay.agent-workflows", "0.1.0");
-const meter = metrics.getMeter("spanreplay.agent-workflows", "0.1.0");
+const tracer = trace.getTracer("scanreplay.agent-workflows", "0.1.0");
+const meter = metrics.getMeter("scanreplay.agent-workflows", "0.1.0");
 
 const workflowDuration = meter.createHistogram("ai.workflow.duration", {
   description: "End-to-end AI workflow duration",

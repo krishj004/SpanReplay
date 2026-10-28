@@ -51,7 +51,7 @@ jobs:
         run: >-
           terraform init
           -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}"
-          -backend-config="key=spanreplay/aws-production.tfstate"
+          -backend-config="key=scanreplay/aws-production.tfstate"
           -backend-config="region=${AWS_REGION}"
           -backend-config="use_lockfile=true"
       - name: Plan infrastructure
@@ -109,9 +109,9 @@ jobs:
             > infrastructure/kubernetes/overlays/production/production.env
           cd infrastructure/kubernetes/overlays/production
           kustomize edit set image \
-            "ghcr.io/krishj004/spanreplay:0.1.0=${SERVICE_REPOSITORY}:${GITHUB_SHA}" \
-            "ghcr.io/krishj004/spanreplay-console:0.1.0=${CONSOLE_REPOSITORY}:${GITHUB_SHA}"
-          kubectl apply --server-side --field-manager=spanreplay-ci -k .
-          kubectl rollout status deployment/api-gateway -n spanreplay --timeout=5m
-          kubectl rollout status deployment/agent-service -n spanreplay --timeout=5m
-          kubectl rollout status deployment/retrieval-service -n spanreplay --timeout=5m
+            "ghcr.io/krishj004/scanreplay:0.1.0=${SERVICE_REPOSITORY}:${GITHUB_SHA}" \
+            "ghcr.io/krishj004/scanreplay-console:0.1.0=${CONSOLE_REPOSITORY}:${GITHUB_SHA}"
+          kubectl apply --server-side --field-manager=scanreplay-ci -k .
+          kubectl rollout status deployment/api-gateway -n scanreplay --timeout=5m
+          kubectl rollout status deployment/agent-service -n scanreplay --timeout=5m
+          kubectl rollout status deployment/retrieval-service -n scanreplay --timeout=5m

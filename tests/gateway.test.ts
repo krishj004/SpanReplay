@@ -65,7 +65,7 @@ afterEach(async () => {
 
 describe("gateway and replay API", () => {
   it("enforces OIDC roles and keeps replay evidence tenant-scoped", async () => {
-    const directory = await mkdtemp(path.join(os.tmpdir(), "spanreplay-test-"));
+    const directory = await mkdtemp(path.join(os.tmpdir(), "scanreplay-test-"));
     temporaryDirectories.push(directory);
     const principals = {
       "operator-a": { subject: "user-a", tenantId: "tenant-a", roles: ["operator"] as const },
@@ -124,7 +124,7 @@ describe("gateway and replay API", () => {
   });
 
   it("records sanitized adapter evidence and re-executes the full workflow", async () => {
-    const directory = await mkdtemp(path.join(os.tmpdir(), "spanreplay-test-"));
+    const directory = await mkdtemp(path.join(os.tmpdir(), "scanreplay-test-"));
     temporaryDirectories.push(directory);
     const store = new ReplayStore(directory);
     const app = buildGatewayServer(
@@ -175,7 +175,7 @@ describe("gateway and replay API", () => {
   });
 
   it("detects drift when a stricter configuration changes the grounding decision", async () => {
-    const directory = await mkdtemp(path.join(os.tmpdir(), "spanreplay-test-"));
+    const directory = await mkdtemp(path.join(os.tmpdir(), "scanreplay-test-"));
     temporaryDirectories.push(directory);
     const store = new ReplayStore(directory);
     const app = buildGatewayServer(
@@ -214,7 +214,7 @@ describe("gateway and replay API", () => {
   });
 
   it("detects drift when a recorded tool failure is overridden to success", async () => {
-    const directory = await mkdtemp(path.join(os.tmpdir(), "spanreplay-test-"));
+    const directory = await mkdtemp(path.join(os.tmpdir(), "scanreplay-test-"));
     temporaryDirectories.push(directory);
     const store = new ReplayStore(directory);
     const app = buildGatewayServer(
@@ -242,7 +242,7 @@ describe("gateway and replay API", () => {
   });
 
   it("refuses live replay when raw content was not retained", async () => {
-    const directory = await mkdtemp(path.join(os.tmpdir(), "spanreplay-test-"));
+    const directory = await mkdtemp(path.join(os.tmpdir(), "scanreplay-test-"));
     temporaryDirectories.push(directory);
     const traceId = "b".repeat(32);
     const result: WorkflowResult = {
@@ -284,8 +284,8 @@ describe("gateway and replay API", () => {
   });
 
   it("enforces the optional constant-time API key boundary", async () => {
-    vi.stubEnv("SPANREPLAY_API_KEY", "local-test-secret");
-    const directory = await mkdtemp(path.join(os.tmpdir(), "spanreplay-test-"));
+    vi.stubEnv("SCANREPLAY_API_KEY", "local-test-secret");
+    const directory = await mkdtemp(path.join(os.tmpdir(), "scanreplay-test-"));
     temporaryDirectories.push(directory);
     const app = buildGatewayServer(new ReplayStore(directory));
 
@@ -293,7 +293,7 @@ describe("gateway and replay API", () => {
     const allowed = await app.inject({
       method: "GET",
       url: "/api/replays",
-      headers: { "x-spanreplay-api-key": "local-test-secret" },
+      headers: { "x-scanreplay-api-key": "local-test-secret" },
     });
 
     expect(denied.statusCode).toBe(401);

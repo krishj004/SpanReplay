@@ -34,5 +34,5 @@ All notable changes follow [Keep a Changelog](https://keepachangelog.com/) and s
 - Kubernetes deployment, CI, CodeQL, tests, incident playbooks, and instrumentation standards.
 - QueryAssure instrumentation example.
 
-[Unreleased]: https://github.com/krishj004/SpanReplay/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/krishj004/SpanReplay/releases/tag/v0.1.0
+[Unreleased]: https://github.com/krishj004/ScanReplay/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/krishj004/ScanReplay/releases/tag/v0.1.0

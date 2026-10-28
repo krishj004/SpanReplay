@@ -1,6 +1,6 @@
-resource "datadog_logs_custom_pipeline" "spanreplay" {
-  name        = "SpanReplay service correlation"
-  description = "Normalizes SpanReplay JSON logs for trace correlation and error tracking. Add this ID to the account-owned pipeline order."
+resource "datadog_logs_custom_pipeline" "scanreplay" {
+  name        = "ScanReplay service correlation"
+  description = "Normalizes ScanReplay JSON logs for trace correlation and error tracking. Add this ID to the account-owned pipeline order."
   is_enabled  = true
   tags        = local.common_tags
 

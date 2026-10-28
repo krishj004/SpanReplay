@@ -7,6 +7,6 @@ Before rendering, copy `production.env.example` to the gitignored `production.en
 ```bash
 cp infrastructure/kubernetes/overlays/production/production.env.example \
   infrastructure/kubernetes/overlays/production/production.env
-kubectl kustomize infrastructure/kubernetes/overlays/production >/tmp/spanreplay-production.yaml
-kubectl apply --server-side --dry-run=server -f /tmp/spanreplay-production.yaml
+kubectl kustomize infrastructure/kubernetes/overlays/production >/tmp/scanreplay-production.yaml
+kubectl apply --server-side --dry-run=server -f /tmp/scanreplay-production.yaml
 ```

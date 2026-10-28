@@ -1,5 +1,5 @@
 variable "aws_region" {
-  description = "AWS region for Terraform state and the SpanReplay deployment."
+  description = "AWS region for Terraform state and the ScanReplay deployment."
   type        = string
   default     = "ca-central-1"
 }
@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "github_repository" {
   description = "GitHub owner/repository allowed to request deployment credentials."
   type        = string
-  default     = "krishj004/SpanReplay"
+  default     = "krishj004/ScanReplay"
 }
 
 variable "state_bucket_name" {
@@ -18,7 +18,7 @@ variable "state_bucket_name" {
 variable "deploy_role_name" {
   description = "IAM role assumed by protected GitHub environments."
   type        = string
-  default     = "spanreplay-github-deploy"
+  default     = "scanreplay-github-deploy"
 }
 
 variable "github_oidc_provider_arn" {
@@ -45,5 +45,5 @@ variable "eks_oidc_provider_arn" {
 variable "resource_name_prefix" {
   description = "Prefix used to constrain deploy-role IAM, ECR, KMS, and S3 permissions."
   type        = string
-  default     = "spanreplay"
+  default     = "scanreplay"
 }

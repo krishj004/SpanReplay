@@ -4,8 +4,8 @@ import { Rate, Trend } from "k6/metrics";
 
 const smoke = __ENV.SMOKE === "true";
 const baseUrl = __ENV.BASE_URL || "http://127.0.0.1:4000";
-const workflowLatency = new Trend("spanreplay_workflow_latency", true);
-const workflowErrors = new Rate("spanreplay_workflow_errors");
+const workflowLatency = new Trend("scanreplay_workflow_latency", true);
+const workflowErrors = new Rate("scanreplay_workflow_errors");
 
 export const options = {
   scenarios: {
@@ -25,8 +25,8 @@ export const options = {
         },
   },
   thresholds: {
-    spanreplay_workflow_latency: ["p(95)<800", "p(99)<1500"],
-    spanreplay_workflow_errors: ["rate<0.01"],
+    scanreplay_workflow_latency: ["p(95)<800", "p(99)<1500"],
+    scanreplay_workflow_errors: ["rate<0.01"],
     http_req_failed: ["rate<0.01"],
   },
 };

@@ -4,7 +4,7 @@ import { trace } from "@opentelemetry/api";
 import {
   createCorrelatedLogger,
   initializeNodeObservability,
-} from "@spanreplay/observability-sdk";
+} from "@scanreplay/observability-sdk";
 
 const serviceName = "orders-service";
 const observability = await initializeNodeObservability({

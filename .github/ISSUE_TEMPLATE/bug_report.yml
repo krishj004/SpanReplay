@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible problem in SpanReplay.
+description: Report a reproducible problem in ScanReplay.
 title: "[bug]: "
 labels: [bug]
 body:

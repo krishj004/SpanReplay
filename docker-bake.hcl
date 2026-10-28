@@ -21,7 +21,7 @@ group "default" {
 target "common" {
   platforms = ["linux/amd64", "linux/arm64"]
   labels = {
-    "org.opencontainers.image.source" = "https://github.com/krishj004/SpanReplay"
+    "org.opencontainers.image.source" = "https://github.com/krishj004/ScanReplay"
     "org.opencontainers.image.revision" = VCS_REF
     "org.opencontainers.image.version" = VERSION
   }
@@ -32,7 +32,7 @@ target "service" {
   inherits   = ["common"]
   context    = "."
   dockerfile = "Dockerfile"
-  tags       = ["${REGISTRY}/spanreplay:${VERSION}"]
+  tags       = ["${REGISTRY}/scanreplay:${VERSION}"]
   args = {
     BUILD_DATE = BUILD_DATE
     VCS_REF    = VCS_REF
@@ -44,7 +44,7 @@ target "console" {
   inherits   = ["common"]
   context    = "."
   dockerfile = "Dockerfile.console"
-  tags       = ["${REGISTRY}/spanreplay-console:${VERSION}"]
+  tags       = ["${REGISTRY}/scanreplay-console:${VERSION}"]
   args = {
     BUILD_DATE = BUILD_DATE
     VCS_REF    = VCS_REF

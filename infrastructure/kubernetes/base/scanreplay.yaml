@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: spanreplay
+  name: scanreplay
   labels:
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-collector-config
-  namespace: spanreplay
+  namespace: scanreplay
 data:
   config.yaml: |
     receivers:
@@ -27,7 +27,7 @@ data:
       resource:
         attributes:
           - key: platform
-            value: spanreplay
+            value: scanreplay
             action: upsert
       batch: {}
     exporters:
@@ -35,7 +35,7 @@ data:
         verbosity: basic
       prometheus:
         endpoint: 0.0.0.0:8889
-        namespace: spanreplay
+        namespace: scanreplay
     service:
       telemetry:
         metrics:
@@ -62,21 +62,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: otel-collector
-  namespace: spanreplay
+  namespace: scanreplay
   labels:
     app.kubernetes.io/name: otel-collector
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: otel-collector
-      app.kubernetes.io/part-of: spanreplay
+      app.kubernetes.io/part-of: scanreplay
   template:
     metadata:
       labels:
         app.kubernetes.io/name: otel-collector
-        app.kubernetes.io/part-of: spanreplay
+        app.kubernetes.io/part-of: scanreplay
     spec:
       automountServiceAccountToken: false
       securityContext:
@@ -113,14 +113,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: otel-collector
-  namespace: spanreplay
+  namespace: scanreplay
   labels:
     app.kubernetes.io/name: otel-collector
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
 spec:
   selector:
     app.kubernetes.io/name: otel-collector
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
   ports:
     - { name: otlp-grpc, port: 4317, targetPort: otlp-grpc }
     - { name: otlp-http, port: 4318, targetPort: otlp-http }
@@ -131,7 +131,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: replay-records
-  namespace: spanreplay
+  namespace: scanreplay
 spec:
   accessModes: ["ReadWriteOnce"]
   resources:
@@ -142,21 +142,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: retrieval-service
-  namespace: spanreplay
+  namespace: scanreplay
   labels:
     app.kubernetes.io/name: retrieval-service
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
 spec:
   replicas: 2
   selector:
     matchLabels:
       app.kubernetes.io/name: retrieval-service
-      app.kubernetes.io/part-of: spanreplay
+      app.kubernetes.io/part-of: scanreplay
   template:
     metadata:
       labels:
         app.kubernetes.io/name: retrieval-service
-        app.kubernetes.io/part-of: spanreplay
+        app.kubernetes.io/part-of: scanreplay
     spec:
       automountServiceAccountToken: false
       securityContext:
@@ -165,14 +165,14 @@ spec:
           type: RuntimeDefault
       containers:
         - name: service
-          image: ghcr.io/krishj004/spanreplay:0.1.0
+          image: ghcr.io/krishj004/scanreplay:0.1.0
           env:
             - { name: SERVICE_NAME, value: retrieval-service }
             - { name: PORT, value: "4002" }
             - { name: NODE_ENV, value: production }
             - { name: DEPLOYMENT_ENVIRONMENT, value: kubernetes }
             - { name: OTEL_EXPORTER_OTLP_ENDPOINT, value: "http://otel-collector:4318" }
-            - { name: SPANREPLAY_REDACT_CONTENT, value: "true" }
+            - { name: SCANREPLAY_REDACT_CONTENT, value: "true" }
           ports:
             - { name: http, containerPort: 4002 }
           readinessProbe:
@@ -196,11 +196,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: retrieval-service
-  namespace: spanreplay
+  namespace: scanreplay
 spec:
   selector:
     app.kubernetes.io/name: retrieval-service
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
   ports:
     - { name: http, port: 4002, targetPort: http }
 ---
@@ -208,21 +208,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: agent-service
-  namespace: spanreplay
+  namespace: scanreplay
   labels:
     app.kubernetes.io/name: agent-service
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
 spec:
   replicas: 2
   selector:
     matchLabels:
       app.kubernetes.io/name: agent-service
-      app.kubernetes.io/part-of: spanreplay
+      app.kubernetes.io/part-of: scanreplay
   template:
     metadata:
       labels:
         app.kubernetes.io/name: agent-service
-        app.kubernetes.io/part-of: spanreplay
+        app.kubernetes.io/part-of: scanreplay
     spec:
       automountServiceAccountToken: false
       securityContext:
@@ -231,7 +231,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: service
-          image: ghcr.io/krishj004/spanreplay:0.1.0
+          image: ghcr.io/krishj004/scanreplay:0.1.0
           env:
             - { name: SERVICE_NAME, value: agent-service }
             - { name: PORT, value: "4001" }
@@ -239,7 +239,7 @@ spec:
             - { name: NODE_ENV, value: production }
             - { name: DEPLOYMENT_ENVIRONMENT, value: kubernetes }
             - { name: OTEL_EXPORTER_OTLP_ENDPOINT, value: "http://otel-collector:4318" }
-            - { name: SPANREPLAY_REDACT_CONTENT, value: "true" }
+            - { name: SCANREPLAY_REDACT_CONTENT, value: "true" }
           ports:
             - { name: http, containerPort: 4001 }
           readinessProbe:
@@ -263,11 +263,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: agent-service
-  namespace: spanreplay
+  namespace: scanreplay
 spec:
   selector:
     app.kubernetes.io/name: agent-service
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
   ports:
     - { name: http, port: 4001, targetPort: http }
 ---
@@ -275,21 +275,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api-gateway
-  namespace: spanreplay
+  namespace: scanreplay
   labels:
     app.kubernetes.io/name: api-gateway
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: api-gateway
-      app.kubernetes.io/part-of: spanreplay
+      app.kubernetes.io/part-of: scanreplay
   template:
     metadata:
       labels:
         app.kubernetes.io/name: api-gateway
-        app.kubernetes.io/part-of: spanreplay
+        app.kubernetes.io/part-of: scanreplay
     spec:
       automountServiceAccountToken: false
       securityContext:
@@ -298,7 +298,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: service
-          image: ghcr.io/krishj004/spanreplay:0.1.0
+          image: ghcr.io/krishj004/scanreplay:0.1.0
           env:
             - { name: SERVICE_NAME, value: api-gateway }
             - { name: PORT, value: "4000" }
@@ -307,8 +307,8 @@ spec:
             - { name: NODE_ENV, value: production }
             - { name: DEPLOYMENT_ENVIRONMENT, value: kubernetes }
             - { name: OTEL_EXPORTER_OTLP_ENDPOINT, value: "http://otel-collector:4318" }
-            - { name: SPANREPLAY_REDACT_CONTENT, value: "true" }
-            - { name: CORS_ORIGIN, value: "http://spanreplay.local,https://spanreplay.example.com" }
+            - { name: SCANREPLAY_REDACT_CONTENT, value: "true" }
+            - { name: CORS_ORIGIN, value: "http://scanreplay.local,https://scanreplay.example.com" }
           ports:
             - { name: http, containerPort: 4000 }
           readinessProbe:
@@ -339,11 +339,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: api-gateway
-  namespace: spanreplay
+  namespace: scanreplay
 spec:
   selector:
     app.kubernetes.io/name: api-gateway
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
   ports:
     - { name: http, port: 4000, targetPort: http }
 ---
@@ -351,21 +351,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: replay-console
-  namespace: spanreplay
+  namespace: scanreplay
   labels:
     app.kubernetes.io/name: replay-console
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: replay-console
-      app.kubernetes.io/part-of: spanreplay
+      app.kubernetes.io/part-of: scanreplay
   template:
     metadata:
       labels:
         app.kubernetes.io/name: replay-console
-        app.kubernetes.io/part-of: spanreplay
+        app.kubernetes.io/part-of: scanreplay
     spec:
       automountServiceAccountToken: false
       securityContext:
@@ -374,7 +374,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: console
-          image: ghcr.io/krishj004/spanreplay-console:0.1.0
+          image: ghcr.io/krishj004/scanreplay-console:0.1.0
           ports:
             - { name: http, containerPort: 8080 }
           readinessProbe:
@@ -404,25 +404,25 @@ apiVersion: v1
 kind: Service
 metadata:
   name: replay-console
-  namespace: spanreplay
+  namespace: scanreplay
 spec:
   selector:
     app.kubernetes.io/name: replay-console
-    app.kubernetes.io/part-of: spanreplay
+    app.kubernetes.io/part-of: scanreplay
   ports:
     - { name: http, port: 80, targetPort: http }
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: spanreplay
-  namespace: spanreplay
+  name: scanreplay
+  namespace: scanreplay
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: 1m
 spec:
   ingressClassName: nginx
   rules:
-    - host: spanreplay.local
+    - host: scanreplay.local
       http:
         paths:
           - path: /api

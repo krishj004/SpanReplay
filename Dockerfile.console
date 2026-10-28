@@ -13,9 +13,9 @@ FROM nginxinc/nginx-unprivileged:1.29-alpine
 ARG BUILD_DATE="unknown"
 ARG VCS_REF="unknown"
 ARG VERSION="0.1.0"
-LABEL org.opencontainers.image.title="SpanReplay Console" \
+LABEL org.opencontainers.image.title="ScanReplay Console" \
       org.opencontainers.image.description="Privacy-aware failure replay console" \
-      org.opencontainers.image.source="https://github.com/krishj004/SpanReplay" \
+      org.opencontainers.image.source="https://github.com/krishj004/ScanReplay" \
       org.opencontainers.image.licenses="Apache-2.0" \
       org.opencontainers.image.created="$BUILD_DATE" \
       org.opencontainers.image.revision="$VCS_REF" \

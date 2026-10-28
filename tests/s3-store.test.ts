@@ -22,8 +22,8 @@ describe("S3ReplayRepository", () => {
       },
     } as unknown as S3Client;
     const store = new S3ReplayRepository({
-      bucket: "spanreplay-evidence",
-      kmsKeyId: "alias/spanreplay",
+      bucket: "scanreplay-evidence",
+      kmsKeyId: "alias/scanreplay",
       client,
     });
     const traceId = "e".repeat(32);
@@ -46,10 +46,10 @@ describe("S3ReplayRepository", () => {
     );
     const put = sent[0] as PutObjectCommand;
     expect(put.input).toMatchObject({
-      Bucket: "spanreplay-evidence",
+      Bucket: "scanreplay-evidence",
       Key: `replays/${traceId}.json`,
       ServerSideEncryption: "aws:kms",
-      SSEKMSKeyId: "alias/spanreplay",
+      SSEKMSKeyId: "alias/scanreplay",
     });
     await expect(store.get(traceId)).resolves.toMatchObject({ originalTraceId: traceId });
     await expect(store.get("../unsafe")).rejects.toThrow("Invalid trace id");
@@ -97,7 +97,7 @@ describe("S3ReplayRepository", () => {
       },
     } as unknown as S3Client;
 
-    const store = new S3ReplayRepository({ bucket: "spanreplay-evidence", client });
+    const store = new S3ReplayRepository({ bucket: "scanreplay-evidence", client });
     const listed = await store.list(1);
     expect(listPage).toBe(2);
     expect(listed.map((item) => item.originalTraceId)).toEqual([newerId]);

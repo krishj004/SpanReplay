@@ -1,11 +1,11 @@
 resource "aws_kms_key" "replays" {
-  description             = "SpanReplay evidence encryption"
+  description             = "ScanReplay evidence encryption"
   enable_key_rotation     = true
   deletion_window_in_days = 30
 }
 
 resource "aws_kms_alias" "replays" {
-  name          = "alias/spanreplay-${var.environment}"
+  name          = "alias/scanreplay-${var.environment}"
   target_key_id = aws_kms_key.replays.key_id
 }
 

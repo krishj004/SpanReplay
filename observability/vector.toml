@@ -1,14 +1,14 @@
 [sources.docker]
 type = "docker_logs"
-include_labels = ["com.spanreplay.platform=spanreplay"]
+include_labels = ["com.scanreplay.platform=scanreplay"]
 
 [transforms.normalize]
 type = "remap"
 inputs = ["docker"]
 source = '''
-.platform = "spanreplay"
+.platform = "scanreplay"
 .environment = "local"
-.service = .label."com.spanreplay.service"
+.service = .label."com.scanreplay.service"
 '''
 
 [sinks.loki]
@@ -16,6 +16,6 @@ type = "loki"
 inputs = ["normalize"]
 endpoint = "http://loki:3100"
 encoding.codec = "json"
-labels.platform = "spanreplay"
+labels.platform = "scanreplay"
 labels.environment = "{{ environment }}"
 labels.service = "{{ service }}"

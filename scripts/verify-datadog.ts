@@ -13,7 +13,7 @@ const apiKey = required("DD_API_KEY");
 const appKey = required("DD_APP_KEY");
 const site = process.env.DD_SITE ?? "datadoghq.com";
 const apiBase = process.env.DD_API_URL ?? `https://api.${site}`;
-const gateway = process.env.SPANREPLAY_BASE_URL ?? "http://localhost:4000";
+const gateway = process.env.SCANREPLAY_BASE_URL ?? "http://localhost:4000";
 const evidencePath = path.resolve(process.env.DD_EVIDENCE_PATH ?? "evidence/datadog-verification.json");
 
 const headers = {
@@ -119,7 +119,7 @@ const errorTrackingPromise = eventually("Error Tracking issue", async () => {
 const metricUrl = new URL(`${apiBase}/api/v1/query`);
 metricUrl.searchParams.set("from", String(Math.floor(Date.now() / 1000) - 900));
 metricUrl.searchParams.set("to", String(Math.floor(Date.now() / 1000)));
-metricUrl.searchParams.set("query", "sum:ai.workflow.runs{platform:spanreplay}.as_count()");
+metricUrl.searchParams.set("query", "sum:ai.workflow.runs{platform:scanreplay}.as_count()");
 const metricPromise = eventually("workflow metric", async () => {
   const response = await fetch(metricUrl, { headers, signal: AbortSignal.timeout(15_000) });
   if (!response.ok) throw new Error(`Datadog metric query returned ${response.status}: ${await response.text()}`);

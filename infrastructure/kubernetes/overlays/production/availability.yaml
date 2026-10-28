@@ -1,26 +1,26 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
-metadata: { name: api-gateway, namespace: spanreplay }
+metadata: { name: api-gateway, namespace: scanreplay }
 spec: { minAvailable: 1, selector: { matchLabels: { app.kubernetes.io/name: api-gateway } } }
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
-metadata: { name: agent-service, namespace: spanreplay }
+metadata: { name: agent-service, namespace: scanreplay }
 spec: { minAvailable: 1, selector: { matchLabels: { app.kubernetes.io/name: agent-service } } }
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
-metadata: { name: retrieval-service, namespace: spanreplay }
+metadata: { name: retrieval-service, namespace: scanreplay }
 spec: { minAvailable: 1, selector: { matchLabels: { app.kubernetes.io/name: retrieval-service } } }
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
-metadata: { name: otel-collector, namespace: spanreplay }
+metadata: { name: otel-collector, namespace: scanreplay }
 spec: { minAvailable: 1, selector: { matchLabels: { app.kubernetes.io/name: otel-collector } } }
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
-metadata: { name: api-gateway, namespace: spanreplay }
+metadata: { name: api-gateway, namespace: scanreplay }
 spec:
   scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: api-gateway }
   minReplicas: 2
@@ -34,7 +34,7 @@ spec:
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
-metadata: { name: agent-service, namespace: spanreplay }
+metadata: { name: agent-service, namespace: scanreplay }
 spec:
   scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: agent-service }
   minReplicas: 2
@@ -46,7 +46,7 @@ spec:
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
-metadata: { name: retrieval-service, namespace: spanreplay }
+metadata: { name: retrieval-service, namespace: scanreplay }
 spec:
   scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: retrieval-service }
   minReplicas: 2
@@ -58,7 +58,7 @@ spec:
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
-metadata: { name: otel-collector, namespace: spanreplay }
+metadata: { name: otel-collector, namespace: scanreplay }
 spec:
   scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: otel-collector }
   minReplicas: 2

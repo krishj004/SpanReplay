@@ -10,7 +10,7 @@ The latest tagged minor release receives security fixes. This pre-1.0 project ma
 
 ## Security boundaries
 
-- SpanReplay redacts secret-like values and raw workflow content by default.
+- ScanReplay redacts secret-like values and raw workflow content by default.
 - Fixture replay is intended for sanitized deterministic evidence, not arbitrary production payload capture.
 - Live replay is rejected when request content was not retained.
 - Replay IDs are strict 32-character hexadecimal trace IDs; file paths are never accepted from API input.
