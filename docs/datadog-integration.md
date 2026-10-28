@@ -2,7 +2,7 @@
 
 ## Verified trial result
 
-The protected workflow passed against a real Datadog US1 trial organization on August 10, 2026. [Workflow run #31409061260](https://github.com/krishj004/SpanReplay/actions/runs/31409061260) observed all four signals through Datadog's APIs:
+The protected workflow passed against a real Datadog US1 trial organization on August 10, 2026. Workflow run #31409061260, on the private source repository, observed all four signals through Datadog's APIs:
 
 - one indexed trace containing `api-gateway`, `agent-service`, and `retrieval-service`;
 - 8 structured logs correlated to the trace;

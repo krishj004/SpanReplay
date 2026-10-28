@@ -16,7 +16,7 @@ SpanReplay is an executable reference implementation and incident lab for produc
 
 ![Datadog Trace Explorer showing the verified SpanReplay trace](docs/assets/spanreplay-datadog.png)
 
-Real Datadog US1 trial evidence: [workflow run #31409061260](https://github.com/krishj004/SpanReplay/actions/runs/31409061260) verified an indexed cross-service trace spanning `api-gateway`, `agent-service`, and `retrieval-service`, plus 8 correlated logs, 1 custom-metric series, and 2 grouped Error Tracking issues. The assertion output is checked in as [machine-readable evidence](evidence/datadog-verification.json).
+Real Datadog US1 trial evidence is checked in as [machine-readable evidence](evidence/datadog-verification.json): an indexed cross-service trace spanning `api-gateway`, `agent-service`, and `retrieval-service`, plus 8 correlated logs, 1 custom-metric series, and 2 grouped Error Tracking issues. The original verification run (#31409061260) lives on the private source repository, so the checked-in assertion output is the verifiable record.
 
 It is intentionally vendor-neutral. The default stack uses OpenTelemetry, Tempo, Prometheus, Loki, Vector, and Grafana; an optional Datadog path includes importable dashboards, monitors, and Terraform.
 
