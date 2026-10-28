@@ -63,7 +63,7 @@ describe.skipIf(!enabled)("observability stack", () => {
     for (const service of expectedServices) expect(traceJson).toContain(service);
 
     const prometheusResult = await eventually("Prometheus workflow metric", async () => {
-      const query = encodeURIComponent("sum(scanreplay_ai_workflow_runs_total)");
+      const query = encodeURIComponent("sum(spanreplay_ai_workflow_runs_total)");
       const body = await fetchJson(`${prometheusUrl}/api/v1/query?query=${query}`) as {
         data?: { result?: unknown[] };
       };
@@ -73,7 +73,7 @@ describe.skipIf(!enabled)("observability stack", () => {
 
     const lokiResult = await eventually("Loki trace-correlated log", async () => {
       const params = new URLSearchParams({
-        query: `{platform="scanreplay"} |= "${workflow.traceId}"`,
+        query: `{platform="spanreplay"} |= "${workflow.traceId}"`,
         limit: "20",
         start: String(BigInt(Date.now() - 60_000) * 1_000_000n),
         end: String(BigInt(Date.now() + 1_000) * 1_000_000n),
@@ -96,7 +96,7 @@ describe.skipIf(!enabled)("observability stack", () => {
 
     const replayAudit = await eventually("Loki replay audit event", async () => {
       const params = new URLSearchParams({
-        query: `{platform="scanreplay"} |= "replay.executed" |= "${workflow.traceId}"`,
+        query: `{platform="spanreplay"} |= "replay.executed" |= "${workflow.traceId}"`,
         limit: "20",
         start: String(BigInt(Date.now() - 60_000) * 1_000_000n),
         end: String(BigInt(Date.now() + 1_000) * 1_000_000n),

@@ -1,6 +1,6 @@
 # Telemetry anti-pattern review
 
-| Anti-pattern | Operational cost | ScanReplay guardrail |
+| Anti-pattern | Operational cost | SpanReplay guardrail |
 | --- | --- | --- |
 | Trace ID, user ID, URL, prompt, or error message on metrics | Cardinality and cost explosion | Executable metric attribute allow-list rejects unapproved and known high-cardinality keys |
 | Logging raw prompts or tool arguments | Privacy/security incident | Content is redacted by default; logger and error normalizer redact common secrets and email addresses |

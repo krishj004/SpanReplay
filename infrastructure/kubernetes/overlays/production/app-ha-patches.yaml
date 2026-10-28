@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: { name: api-gateway, namespace: scanreplay }
+metadata: { name: api-gateway, namespace: spanreplay }
 spec:
   replicas: 2
   strategy: { type: RollingUpdate, rollingUpdate: { maxUnavailable: 0, maxSurge: 1 } }
@@ -18,7 +18,7 @@ spec:
 ---
 apiVersion: apps/v1
 kind: Deployment
-metadata: { name: agent-service, namespace: scanreplay }
+metadata: { name: agent-service, namespace: spanreplay }
 spec:
   strategy: { type: RollingUpdate, rollingUpdate: { maxUnavailable: 0, maxSurge: 1 } }
   template:
@@ -31,7 +31,7 @@ spec:
 ---
 apiVersion: apps/v1
 kind: Deployment
-metadata: { name: retrieval-service, namespace: scanreplay }
+metadata: { name: retrieval-service, namespace: spanreplay }
 spec:
   strategy: { type: RollingUpdate, rollingUpdate: { maxUnavailable: 0, maxSurge: 1 } }
   template:
@@ -48,7 +48,7 @@ spec:
 ---
 apiVersion: apps/v1
 kind: Deployment
-metadata: { name: replay-console, namespace: scanreplay }
+metadata: { name: replay-console, namespace: spanreplay }
 spec:
   replicas: 2
   strategy: { type: RollingUpdate, rollingUpdate: { maxUnavailable: 0, maxSurge: 1 } }
@@ -62,5 +62,5 @@ spec:
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
-metadata: { name: replay-records, namespace: scanreplay }
+metadata: { name: replay-records, namespace: spanreplay }
 $patch: delete

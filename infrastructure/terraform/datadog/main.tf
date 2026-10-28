@@ -1,7 +1,7 @@
 locals {
   notifications = join(" ", var.notification_targets)
   common_tags = [
-    "platform:scanreplay",
+    "platform:spanreplay",
     "team:ai-platform",
     "env:${var.environment}",
     "managed-by:terraform",
@@ -9,7 +9,7 @@ locals {
 }
 
 resource "datadog_monitor" "workflow_failures" {
-  name    = "[ScanReplay] Sustained production AI workflow failures"
+  name    = "[SpanReplay] Sustained production AI workflow failures"
   type    = "metric alert"
   query   = "sum(last_5m):sum:ai.workflow.runs{env:${var.environment},workflow_status:failed}.as_count() > 5"
   message = <<-EOT
@@ -30,7 +30,7 @@ resource "datadog_monitor" "workflow_failures" {
 }
 
 resource "datadog_monitor" "workflow_p95_latency" {
-  name    = "[ScanReplay] Workflow p95 latency exceeds 3 seconds"
+  name    = "[SpanReplay] Workflow p95 latency exceeds 3 seconds"
   type    = "metric alert"
   query   = "percentile(last_10m):p95:ai.workflow.duration{env:${var.environment}} > 3000"
   message = <<-EOT
@@ -50,7 +50,7 @@ resource "datadog_monitor" "workflow_p95_latency" {
 }
 
 resource "datadog_monitor" "cost_spike" {
-  name    = "[ScanReplay] Estimated model cost spike"
+  name    = "[SpanReplay] Estimated model cost spike"
   type    = "metric alert"
   query   = "sum(last_15m):sum:ai.workflow.estimated.cost{env:${var.environment}} > 10"
   message = <<-EOT
@@ -70,7 +70,7 @@ resource "datadog_monitor" "cost_spike" {
 }
 
 resource "datadog_monitor" "validation_failures" {
-  name    = "[ScanReplay] AI validation failures elevated"
+  name    = "[SpanReplay] AI validation failures elevated"
   type    = "metric alert"
   query   = "sum(last_10m):sum:ai.validation.failures{env:${var.environment}}.as_count() > 10"
   message = <<-EOT
@@ -90,7 +90,7 @@ resource "datadog_monitor" "validation_failures" {
 }
 
 resource "datadog_monitor" "retrieval_load_shedding" {
-  name    = "[ScanReplay] Retrieval is shedding sustained load"
+  name    = "[SpanReplay] Retrieval is shedding sustained load"
   type    = "metric alert"
   query   = "sum(last_5m):sum:ai.retrieval.admissions{env:${var.environment},admission_outcome:shed}.as_count() > 10"
   message = <<-EOT
@@ -110,7 +110,7 @@ resource "datadog_monitor" "retrieval_load_shedding" {
 }
 
 resource "datadog_monitor" "new_backend_errors" {
-  name    = "[ScanReplay] New backend error issue detected"
+  name    = "[SpanReplay] New backend error issue detected"
   type    = "error-tracking alert"
   query   = "error-tracking(\"env:${var.environment} service:agent-service\").source(\"backend\").new().rollup(\"count\").by(\"@issue.id\").last(\"1d\") > 0"
   message = <<-EOT
@@ -129,7 +129,7 @@ resource "datadog_monitor" "new_backend_errors" {
 }
 
 resource "datadog_service_level_objective" "workflow_availability" {
-  name        = "ScanReplay production AI workflow availability"
+  name        = "SpanReplay production AI workflow availability"
   type        = "monitor"
   description = "Successful production AI workflows excluding intentionally blocked policy decisions."
   monitor_ids = [datadog_monitor.workflow_failures.id]

@@ -139,7 +139,7 @@ data "aws_iam_policy_document" "github_deploy" {
   }
 
   statement {
-    sid    = "ScanReplayIAM"
+    sid    = "SpanReplayIAM"
     effect = "Allow"
     actions = [
       "iam:CreateRole",
@@ -158,7 +158,7 @@ data "aws_iam_policy_document" "github_deploy" {
   }
 
   statement {
-    sid    = "ScanReplayKMS"
+    sid    = "SpanReplayKMS"
     effect = "Allow"
     actions = [
       "kms:CreateKey",
@@ -179,7 +179,7 @@ data "aws_iam_policy_document" "github_deploy" {
   }
 
   statement {
-    sid    = "ScanReplayECR"
+    sid    = "SpanReplayECR"
     effect = "Allow"
     actions = [
       "ecr:CreateRepository",
@@ -218,7 +218,7 @@ data "aws_iam_policy_document" "github_deploy" {
 }
 
 resource "aws_iam_role_policy" "github_deploy" {
-  name   = "scanreplay-deployment"
+  name   = "spanreplay-deployment"
   role   = aws_iam_role.github_deploy.id
   policy = data.aws_iam_policy_document.github_deploy.json
 }

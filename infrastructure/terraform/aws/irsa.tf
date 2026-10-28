@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "gateway_assume_role" {
 }
 
 resource "aws_iam_role" "gateway" {
-  name               = "scanreplay-${var.environment}-gateway"
+  name               = "spanreplay-${var.environment}-gateway"
   assume_role_policy = data.aws_iam_policy_document.gateway_assume_role.json
 }
 

@@ -28,22 +28,22 @@ patches:
         value: { name: REPLAY_STORE_BACKEND, value: s3 }
       - op: add
         path: /spec/template/spec/containers/0/env/-
-        value: { name: REPLAY_S3_BUCKET, valueFrom: { configMapKeyRef: { name: scanreplay-production, key: replayBucket } } }
+        value: { name: REPLAY_S3_BUCKET, valueFrom: { configMapKeyRef: { name: spanreplay-production, key: replayBucket } } }
       - op: add
         path: /spec/template/spec/containers/0/env/-
-        value: { name: REPLAY_S3_KMS_KEY_ID, valueFrom: { configMapKeyRef: { name: scanreplay-production, key: replayKmsKeyArn } } }
+        value: { name: REPLAY_S3_KMS_KEY_ID, valueFrom: { configMapKeyRef: { name: spanreplay-production, key: replayKmsKeyArn } } }
       - op: add
         path: /spec/template/spec/containers/0/env/-
-        value: { name: AUTH0_ISSUER_BASE_URL, valueFrom: { configMapKeyRef: { name: scanreplay-production, key: auth0IssuerBaseUrl } } }
+        value: { name: AUTH0_ISSUER_BASE_URL, valueFrom: { configMapKeyRef: { name: spanreplay-production, key: auth0IssuerBaseUrl } } }
       - op: add
         path: /spec/template/spec/containers/0/env/-
-        value: { name: AUTH0_AUDIENCE, valueFrom: { configMapKeyRef: { name: scanreplay-production, key: auth0Audience } } }
+        value: { name: AUTH0_AUDIENCE, valueFrom: { configMapKeyRef: { name: spanreplay-production, key: auth0Audience } } }
       - op: add
         path: /spec/template/spec/containers/0/env/-
         value: { name: AUTH0_REQUIRE_TENANT, value: "true" }
 configMapGenerator:
-  - name: scanreplay-production
-    namespace: scanreplay
+  - name: spanreplay-production
+    namespace: spanreplay
     envs:
       - production.env
 generatorOptions:
@@ -51,7 +51,7 @@ generatorOptions:
 replacements:
   - source:
       kind: ConfigMap
-      name: scanreplay-production
+      name: spanreplay-production
       fieldPath: data.gatewayIrsaRoleArn
     targets:
       - select:

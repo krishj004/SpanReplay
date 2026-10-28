@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repository="${GITHUB_REPOSITORY:-krishj004/ScanReplay}"
+repository="${GITHUB_REPOSITORY:-krishj004/SpanReplay}"
 
 required=(
   AWS_DEPLOY_ROLE_ARN

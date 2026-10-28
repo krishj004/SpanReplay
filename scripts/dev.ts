@@ -14,7 +14,7 @@ const children: ChildProcess[] = commands.map(([service, port]) =>
       SERVICE_NAME: service,
       PORT: port,
       OTEL_SDK_DISABLED: process.env.OTEL_SDK_DISABLED ?? "true",
-      SCANREPLAY_REDACT_CONTENT: process.env.SCANREPLAY_REDACT_CONTENT ?? "true",
+      SPANREPLAY_REDACT_CONTENT: process.env.SPANREPLAY_REDACT_CONTENT ?? "true",
     },
   }),
 );

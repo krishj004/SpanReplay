@@ -1,22 +1,22 @@
-# ScanReplay
+# SpanReplay
 
-[![CI](https://github.com/krishj004/ScanReplay/actions/workflows/ci.yml/badge.svg)](https://github.com/krishj004/ScanReplay/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/krishj004/ScanReplay/actions/workflows/codeql.yml/badge.svg)](https://github.com/krishj004/ScanReplay/actions/workflows/codeql.yml)
-[![Datadog verification](https://github.com/krishj004/ScanReplay/actions/workflows/datadog-verification.yml/badge.svg)](https://github.com/krishj004/ScanReplay/actions/workflows/datadog-verification.yml)
+[![CI](https://github.com/krishj004/SpanReplay/actions/workflows/ci.yml/badge.svg)](https://github.com/krishj004/SpanReplay/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/krishj004/SpanReplay/actions/workflows/codeql.yml/badge.svg)](https://github.com/krishj004/SpanReplay/actions/workflows/codeql.yml)
+[![Datadog verification](https://github.com/krishj004/SpanReplay/actions/workflows/datadog-verification.yml/badge.svg)](https://github.com/krishj004/SpanReplay/actions/workflows/datadog-verification.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![OpenTelemetry](https://img.shields.io/badge/OpenTelemetry-enabled-4f62ad.svg)](https://opentelemetry.io/)
 
 **OpenTelemetry observability and privacy-aware failure replay for production AI agents.**
 
-ScanReplay is an executable reference implementation and incident lab for production AI-agent observability and deterministic failure replay. It diagnoses LLM and agent workflows across service boundaries by combining distributed traces, structured logs, AI-specific metrics, SLOs, controlled failure injection, and replayable evidence.
+SpanReplay is an executable reference implementation and incident lab for production AI-agent observability and deterministic failure replay. It diagnoses LLM and agent workflows across service boundaries by combining distributed traces, structured logs, AI-specific metrics, SLOs, controlled failure injection, and replayable evidence.
 
-![ScanReplay Console showing a failed tool span and correlated signals](docs/assets/scanreplay-console.jpg)
+![SpanReplay Console showing a failed tool span and correlated signals](docs/assets/spanreplay-console.jpg)
 
-[Watch the 66-second Console walkthrough](docs/assets/scanreplay-demo.mp4) — a concise tour of cross-service traces, correlated signals, failure evidence, and deterministic replay.
+[Watch the 66-second Console walkthrough](docs/assets/spanreplay-demo.mp4) — a concise tour of cross-service traces, correlated signals, failure evidence, and deterministic replay.
 
-![Datadog Trace Explorer showing the verified ScanReplay trace](docs/assets/scanreplay-datadog.png)
+![Datadog Trace Explorer showing the verified SpanReplay trace](docs/assets/spanreplay-datadog.png)
 
-Real Datadog US1 trial evidence: [workflow run #31409061260](https://github.com/krishj004/ScanReplay/actions/runs/31409061260) verified an indexed cross-service trace spanning `api-gateway`, `agent-service`, and `retrieval-service`, plus 8 correlated logs, 1 custom-metric series, and 2 grouped Error Tracking issues. The assertion output is checked in as [machine-readable evidence](evidence/datadog-verification.json).
+Real Datadog US1 trial evidence: [workflow run #31409061260](https://github.com/krishj004/SpanReplay/actions/runs/31409061260) verified an indexed cross-service trace spanning `api-gateway`, `agent-service`, and `retrieval-service`, plus 8 correlated logs, 1 custom-metric series, and 2 grouped Error Tracking issues. The assertion output is checked in as [machine-readable evidence](evidence/datadog-verification.json).
 
 It is intentionally vendor-neutral. The default stack uses OpenTelemetry, Tempo, Prometheus, Loki, Vector, and Grafana; an optional Datadog path includes importable dashboards, monitors, and Terraform.
 
@@ -127,11 +127,11 @@ The custom attributes follow the OpenTelemetry GenAI semantic-convention naming 
 
 ## Privacy model
 
-`SCANREPLAY_REDACT_CONTENT=true` is the default. Raw questions are replaced with `[CONTENT_REDACTED]`, secret-like keys and bearer tokens are sanitized, replay records are written with owner-only permissions, and live replay is disabled when content was not retained. Fixture replay reproduces control flow from sanitized evidence.
+`SPANREPLAY_REDACT_CONTENT=true` is the default. Raw questions are replaced with `[CONTENT_REDACTED]`, secret-like keys and bearer tokens are sanitized, replay records are written with owner-only permissions, and live replay is disabled when content was not retained. Fixture replay reproduces control flow from sanitized evidence.
 
 This is a reference implementation—not a claim that replay is automatically safe for every regulated workload. Review [privacy and replay](docs/privacy-and-replay.md) before adapting it.
 
-For a non-browser API deployment, set `SCANREPLAY_API_KEY` and send it in `x-scanreplay-api-key`. The gateway also applies a one-megabyte body limit, security headers, configurable CORS allow-list, and request rate limiting. Put public Console deployments behind your organization's OIDC or identity-aware proxy; do not embed a shared API key in frontend JavaScript.
+For a non-browser API deployment, set `SPANREPLAY_API_KEY` and send it in `x-spanreplay-api-key`. The gateway also applies a one-megabyte body limit, security headers, configurable CORS allow-list, and request rate limiting. Put public Console deployments behind your organization's OIDC or identity-aware proxy; do not embed a shared API key in frontend JavaScript.
 
 For production, configure Auth0/OIDC instead of the shared key. Verified tenant claims isolate replay evidence; hierarchical viewer/operator/admin roles separate inspection, fixture replay, and live replay; live operations require a reason and generate privacy-safe audit logs. See `docs/auth0-access-control.md`.
 
@@ -176,7 +176,7 @@ The default Kubernetes manifest is a local/reference deployment. Its production 
 
 ## Scope and non-goals
 
-ScanReplay is an executable reference implementation and incident lab, not a hosted observability SaaS. The simulated model keeps the project reproducible and free to run; adapters for real providers should preserve the same instrumentation and privacy boundaries.
+SpanReplay is an executable reference implementation and incident lab, not a hosted observability SaaS. The simulated model keeps the project reproducible and free to run; adapters for real providers should preserve the same instrumentation and privacy boundaries.
 
 The tool call is intentionally an in-process simulated adapter boundary, not a separately
 deployed worker service. This keeps the incident lab deterministic while making the boundary

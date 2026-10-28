@@ -8,7 +8,7 @@ import { buildRetrievalServer } from "../src/services/retrieval/server.js";
 import { createRuntimeAdapters } from "../src/adapters/runtime.js";
 import { runRecordedAgent } from "../src/services/agent/server.js";
 
-const replayDirectory = await mkdtemp(path.join(tmpdir(), "scanreplay-demo-"));
+const replayDirectory = await mkdtemp(path.join(tmpdir(), "spanreplay-demo-"));
 const retrieval = buildRetrievalServer();
 const runtimeAdapters = createRuntimeAdapters();
 const gateway = buildGatewayServer(
@@ -74,7 +74,7 @@ const driftResponse = await gateway.inject({
 });
 const drift = driftResponse.json();
 
-console.log("\nScanReplay deterministic incident lab\n");
+console.log("\nSpanReplay deterministic incident lab\n");
 console.table(rows);
 console.log(
   JSON.stringify(

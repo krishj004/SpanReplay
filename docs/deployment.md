@@ -2,7 +2,7 @@
 
 ## Docker Compose
 
-Docker Desktop and Colima both expose a standard Docker Engine API, so ScanReplay uses the same commands with either runtime.
+Docker Desktop and Colima both expose a standard Docker Engine API, so SpanReplay uses the same commands with either runtime.
 
 ```bash
 # Colima option on macOS
@@ -21,17 +21,17 @@ Run the deterministic no-container check first with `npm run demo`. The full sta
 
 ## Kubernetes
 
-Build and push the two images, then update image tags in `infrastructure/kubernetes/base/scanreplay.yaml`:
+Build and push the two images, then update image tags in `infrastructure/kubernetes/base/spanreplay.yaml`:
 
 ```bash
-docker build -t ghcr.io/krishj004/scanreplay:0.1.0 .
-docker build -f Dockerfile.console -t ghcr.io/krishj004/scanreplay-console:0.1.0 .
-docker push ghcr.io/krishj004/scanreplay:0.1.0
-docker push ghcr.io/krishj004/scanreplay-console:0.1.0
+docker build -t ghcr.io/krishj004/spanreplay:0.1.0 .
+docker build -f Dockerfile.console -t ghcr.io/krishj004/spanreplay-console:0.1.0 .
+docker push ghcr.io/krishj004/spanreplay:0.1.0
+docker push ghcr.io/krishj004/spanreplay-console:0.1.0
 kubectl apply --server-side -k infrastructure/kubernetes/base
 ```
 
-The manifest assumes an NGINX Ingress controller and the development host `scanreplay.local`. Replace the host, add TLS, set the CORS allow-list, and place the Console/API behind organizational identity before an internet-facing deployment.
+The manifest assumes an NGINX Ingress controller and the development host `spanreplay.local`. Replace the host, add TLS, set the CORS allow-list, and place the Console/API behind organizational identity before an internet-facing deployment.
 
 The base manifest intentionally uses one gateway replica and a local PVC. The production overlay removes that single-writer boundary, selects `S3ReplayRepository`, injects KMS/S3 and IRSA values from a non-committed environment file, runs at least two replicas, and adds PDB/HPA/topology constraints. Auth0 issuer/audience are injected at the same boundary and end-user tenant claims remain separate from AWS workload identity.
 

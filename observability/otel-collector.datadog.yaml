@@ -14,7 +14,7 @@ processors:
   resource:
     attributes:
       - key: platform
-        value: scanreplay
+        value: spanreplay
         action: upsert
   batch:
     timeout: 2s

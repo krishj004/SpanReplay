@@ -4,8 +4,8 @@ import { Rate, Trend } from "k6/metrics";
 
 const smoke = __ENV.SMOKE === "true";
 const retrievalUrl = __ENV.RETRIEVAL_URL || "http://127.0.0.1:4002";
-const retrievalLatency = new Trend("scanreplay_retrieval_saturation_latency", true);
-const retrievalErrors = new Rate("scanreplay_retrieval_errors");
+const retrievalLatency = new Trend("spanreplay_retrieval_saturation_latency", true);
+const retrievalErrors = new Rate("spanreplay_retrieval_errors");
 
 export const options = {
   scenarios: {
@@ -16,8 +16,8 @@ export const options = {
     },
   },
   thresholds: {
-    scanreplay_retrieval_saturation_latency: ["p(95)<1200"],
-    scanreplay_retrieval_errors: ["rate<0.01"],
+    spanreplay_retrieval_saturation_latency: ["p(95)<1200"],
+    spanreplay_retrieval_errors: ["rate<0.01"],
   },
 };
 

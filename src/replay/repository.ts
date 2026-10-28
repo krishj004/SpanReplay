@@ -38,7 +38,7 @@ export function createReplayRecord(
   result: WorkflowResult,
   fixture: ReplayFixture,
 ): ReplayRecord {
-  const contentRedacted = process.env.SCANREPLAY_REDACT_CONTENT !== "false";
+  const contentRedacted = process.env.SPANREPLAY_REDACT_CONTENT !== "false";
   const strippedRequest = stripReplayContent({ ...request }) as WorkflowRequest;
   const strippedResult = structuredClone(result);
   if (contentRedacted && strippedResult.answer !== null) strippedResult.answer = "[CONTENT_REDACTED]";

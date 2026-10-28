@@ -68,7 +68,7 @@ export function createOidcTokenVerifierFromEnv(): TokenVerifier | null {
 }
 
 export function createOidcTokenVerifier(options: OidcTokenVerifierOptions): TokenVerifier {
-  const rolesClaim = options.rolesClaim ?? "https://scanreplay.example.com/roles";
+  const rolesClaim = options.rolesClaim ?? "https://spanreplay.example.com/roles";
   const tenantClaim = options.tenantClaim ?? "org_id";
   return async (token) => {
     const { payload } = await jwtVerify(token, options.keyResolver, {

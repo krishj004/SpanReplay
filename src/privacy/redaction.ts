@@ -41,7 +41,7 @@ export function redact<T>(input: T): RedactionResult<T> {
 }
 
 export function stripReplayContent<T extends Record<string, unknown>>(input: T): T {
-  if (process.env.SCANREPLAY_REDACT_CONTENT === "false") return input;
+  if (process.env.SPANREPLAY_REDACT_CONTENT === "false") return input;
   const clone = structuredClone(input);
   const mutable = clone as Record<string, unknown>;
   if ("question" in mutable) mutable.question = "[CONTENT_REDACTED]";

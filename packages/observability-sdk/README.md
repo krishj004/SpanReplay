@@ -1,6 +1,6 @@
-# @scanreplay/observability-sdk
+# @spanreplay/observability-sdk
 
-Reusable Node.js observability bootstrap used by every ScanReplay service. It standardizes
+Reusable Node.js observability bootstrap used by every SpanReplay service. It standardizes
 OpenTelemetry resource attributes, OTLP exporters, trace-correlated Pino logging, secret
 redaction, and enforceable metric-cardinality policy.
 
@@ -8,7 +8,7 @@ redaction, and enforceable metric-cardinality policy.
 import {
   createCorrelatedLogger,
   initializeNodeObservability,
-} from "@scanreplay/observability-sdk";
+} from "@spanreplay/observability-sdk";
 
 const logger = createCorrelatedLogger({
   serviceName: "billing-service",

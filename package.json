@@ -1,5 +1,5 @@
 {
-  "name": "scanreplay",
+  "name": "spanreplay",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -49,7 +49,7 @@
     "test:observability": "vitest run tests/observability.integration.test.ts --testTimeout=60000",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
-    "demo": "LOG_LEVEL=silent OTEL_SDK_DISABLED=true SCANREPLAY_REDACT_CONTENT=true node --import tsx scripts/demo.ts",
+    "demo": "LOG_LEVEL=silent OTEL_SDK_DISABLED=true SPANREPLAY_REDACT_CONTENT=true node --import tsx scripts/demo.ts",
     "start": "node dist/src/bin/service.js"
   },
   "dependencies": {
@@ -65,7 +65,7 @@
     "@opentelemetry/sdk-metrics": "^2.10.0",
     "@opentelemetry/sdk-node": "^0.221.0",
     "@opentelemetry/semantic-conventions": "^1.43.0",
-    "@scanreplay/observability-sdk": "file:packages/observability-sdk",
+    "@spanreplay/observability-sdk": "file:packages/observability-sdk",
     "fastify": "^5.11.2",
     "jose": "^6.2.8",
     "pino": "^10.3.1",

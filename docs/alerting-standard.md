@@ -12,7 +12,7 @@ Alerts should indicate urgent user impact and provide a next action. Dashboards 
 | Grounding quality | top score ≥ 0.70 | per request | alert only on sustained distribution shift |
 | Cost | workload-specific budget | 15 minutes / daily | sudden increase by model or prompt version |
 
-The checked-in `ScanReplayAvailabilityBudgetFastBurn` rule implements the 99.0% availability
+The checked-in `SpanReplayAvailabilityBudgetFastBurn` rule implements the 99.0% availability
 objective as a multi-window burn alert: both the 5-minute and 1-hour failure ratios must exceed
 14.4 times the 1% error budget. This avoids paging on one isolated provider error while detecting
 rapid, sustained user impact. Expected policy blocks are not included in the failure numerator.

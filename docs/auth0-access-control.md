@@ -1,6 +1,6 @@
 # Auth0/OIDC access control
 
-ScanReplay uses local API-key authentication only when no OIDC issuer/audience is configured. Production mode verifies Auth0 RS256 access tokens against the tenant JWKS and requires both audience and issuer validation.
+SpanReplay uses local API-key authentication only when no OIDC issuer/audience is configured. Production mode verifies Auth0 RS256 access tokens against the tenant JWKS and requires both audience and issuer validation.
 
 ## Roles
 
@@ -14,12 +14,12 @@ Roles are hierarchical. Live replay also requires a written reason of at least e
 
 ## Auth0 configuration
 
-Create an API with identifier `https://scanreplay-api`. Add a post-login Action that places approved application roles in the namespaced `https://scanreplay.example.com/roles` access-token claim. For Auth0 Organizations, the standard `org_id` claim is the tenant boundary; tokens without it are rejected by default.
+Create an API with identifier `https://spanreplay-api`. Add a post-login Action that places approved application roles in the namespaced `https://spanreplay.example.com/roles` access-token claim. For Auth0 Organizations, the standard `org_id` claim is the tenant boundary; tokens without it are rejected by default.
 
 ```bash
 export AUTH0_ISSUER_BASE_URL='https://YOUR_TENANT.auth0.com/'
-export AUTH0_AUDIENCE='https://scanreplay-api'
-export AUTH0_ROLES_CLAIM='https://scanreplay.example.com/roles'
+export AUTH0_AUDIENCE='https://spanreplay-api'
+export AUTH0_ROLES_CLAIM='https://spanreplay.example.com/roles'
 export AUTH0_TENANT_CLAIM='org_id'
 export AUTH0_REQUIRE_TENANT='true'
 ```

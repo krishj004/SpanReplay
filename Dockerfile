@@ -14,9 +14,9 @@ ARG VCS_REF="unknown"
 ARG VERSION="0.1.0"
 ENV NODE_ENV=production
 WORKDIR /app
-LABEL org.opencontainers.image.title="ScanReplay services" \
+LABEL org.opencontainers.image.title="SpanReplay services" \
       org.opencontainers.image.description="OpenTelemetry observability and deterministic failure replay for AI agents" \
-      org.opencontainers.image.source="https://github.com/krishj004/ScanReplay" \
+      org.opencontainers.image.source="https://github.com/krishj004/SpanReplay" \
       org.opencontainers.image.licenses="Apache-2.0" \
       org.opencontainers.image.created="$BUILD_DATE" \
       org.opencontainers.image.revision="$VCS_REF" \

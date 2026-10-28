@@ -17,15 +17,15 @@
 The configuration script expects these shell variables (values shown are placeholders):
 
 ```bash
-export AWS_DEPLOY_ROLE_ARN='arn:aws:iam::ACCOUNT_ID:role/scanreplay-github-deploy'
+export AWS_DEPLOY_ROLE_ARN='arn:aws:iam::ACCOUNT_ID:role/spanreplay-github-deploy'
 export AWS_REGION='ca-central-1'
-export TF_STATE_BUCKET='YOUR-UNIQUE-scanreplay-tfstate'
-export REPLAY_BUCKET_NAME='YOUR-UNIQUE-scanreplay-production'
+export TF_STATE_BUCKET='YOUR-UNIQUE-spanreplay-tfstate'
+export REPLAY_BUCKET_NAME='YOUR-UNIQUE-spanreplay-production'
 export EKS_OIDC_PROVIDER_ARN='BOOTSTRAP_OUTPUT'
 export EKS_OIDC_ISSUER_URL='BOOTSTRAP_OUTPUT'
 export EKS_CLUSTER_NAME='YOUR-EXISTING-CLUSTER'
 export AUTH0_ISSUER_BASE_URL='https://YOUR_TENANT.auth0.com/'
-export AUTH0_AUDIENCE='https://scanreplay-api'
+export AUTH0_AUDIENCE='https://spanreplay-api'
 export DD_SITE='datadoghq.com'
 export DD_API_URL='https://api.datadoghq.com/'
 export DD_API_KEY='CREATE_A_SCOPED_DATADOG_API_KEY'

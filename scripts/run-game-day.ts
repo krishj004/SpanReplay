@@ -4,7 +4,7 @@ import path from "node:path";
 import { promisify } from "node:util";
 
 const execFile = promisify(execFileCallback);
-const gateway = process.env.SCANREPLAY_BASE_URL ?? "http://127.0.0.1:4000";
+const gateway = process.env.SPANREPLAY_BASE_URL ?? "http://127.0.0.1:4000";
 const tempo = process.env.INTEGRATION_TEMPO_URL ?? "http://127.0.0.1:3200";
 const collectorMetrics = process.env.COLLECTOR_METRICS_URL ?? "http://127.0.0.1:8888/metrics";
 

@@ -1,6 +1,6 @@
 # Contributing
 
-ScanReplay welcomes focused contributions that improve production AI reliability, observability, replay safety, or the five-minute developer experience.
+SpanReplay welcomes focused contributions that improve production AI reliability, observability, replay safety, or the five-minute developer experience.
 
 ## Development
 

@@ -27,7 +27,7 @@ variable "eks_oidc_issuer_url" {
 
 variable "kubernetes_namespace" {
   type    = string
-  default = "scanreplay"
+  default = "spanreplay"
 }
 
 variable "kubernetes_service_account" {

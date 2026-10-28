@@ -18,7 +18,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Platform  = "scanreplay"
+      Platform  = "spanreplay"
       ManagedBy = "terraform-bootstrap"
     }
   }

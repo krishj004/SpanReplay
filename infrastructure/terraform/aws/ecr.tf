@@ -1,12 +1,12 @@
 resource "aws_ecr_repository" "service" {
-  name                 = "scanreplay/service"
+  name                 = "spanreplay/service"
   image_tag_mutability = "IMMUTABLE"
   image_scanning_configuration { scan_on_push = true }
   encryption_configuration { encryption_type = "KMS" }
 }
 
 resource "aws_ecr_repository" "console" {
-  name                 = "scanreplay/console"
+  name                 = "spanreplay/console"
   image_tag_mutability = "IMMUTABLE"
   image_scanning_configuration { scan_on_push = true }
   encryption_configuration { encryption_type = "KMS" }

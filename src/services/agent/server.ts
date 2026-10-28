@@ -37,7 +37,7 @@ function resolveOptions(options: AgentExecutionOptions = {}) {
   const configVersion = options.configVersion ?? "config-v1";
   return {
     configVersion,
-    codeVersion: options.codeVersion ?? process.env.SCANREPLAY_CODE_VERSION ?? "0.1.0",
+    codeVersion: options.codeVersion ?? process.env.SPANREPLAY_CODE_VERSION ?? "0.1.0",
     groundingThreshold: options.groundingThreshold
       ?? (configVersion === "strict-v2" ? 0.99 : 0.7),
   };

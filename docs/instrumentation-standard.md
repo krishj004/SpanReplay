@@ -9,7 +9,7 @@ This standard keeps traces, metrics, and logs consistent across agent teams whil
 | `service.name` | `agent-service` | Stable deployable component name |
 | `service.version` | `0.1.0` | Release or image version |
 | `deployment.environment.name` | `production` | `local`, `staging`, or `production` |
-| `service.namespace` | `scanreplay` | Owning platform or product boundary |
+| `service.namespace` | `spanreplay` | Owning platform or product boundary |
 | `service.instance.id` | container/host ID | Trace-only; never aggregate as a metric tag |
 
 ## Required spans

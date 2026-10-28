@@ -1,37 +1,37 @@
 groups:
-  - name: scanreplay-workflows
+  - name: spanreplay-workflows
     rules:
-      - alert: ScanReplaySustainedWorkflowFailures
-        expr: sum(rate(scanreplay_ai_workflow_runs_total{workflow_status="failed"}[5m])) > 0.05
+      - alert: SpanReplaySustainedWorkflowFailures
+        expr: sum(rate(spanreplay_ai_workflow_runs_total{workflow_status="failed"}[5m])) > 0.05
         for: 5m
         labels: { severity: page, team: ai-platform }
         annotations:
-          summary: ScanReplay workflows are failing persistently
+          summary: SpanReplay workflows are failing persistently
           runbook: docs/incident-playbook.md
-      - alert: ScanReplayAvailabilityBudgetFastBurn
+      - alert: SpanReplayAvailabilityBudgetFastBurn
         expr: |
           (
-            sum(rate(scanreplay_ai_workflow_runs_total{workflow_status="failed"}[5m]))
-            / clamp_min(sum(rate(scanreplay_ai_workflow_runs_total[5m])), 0.000001)
+            sum(rate(spanreplay_ai_workflow_runs_total{workflow_status="failed"}[5m]))
+            / clamp_min(sum(rate(spanreplay_ai_workflow_runs_total[5m])), 0.000001)
           ) > (14.4 * 0.01)
           and
           (
-            sum(rate(scanreplay_ai_workflow_runs_total{workflow_status="failed"}[1h]))
-            / clamp_min(sum(rate(scanreplay_ai_workflow_runs_total[1h])), 0.000001)
+            sum(rate(spanreplay_ai_workflow_runs_total{workflow_status="failed"}[1h]))
+            / clamp_min(sum(rate(spanreplay_ai_workflow_runs_total[1h])), 0.000001)
           ) > (14.4 * 0.01)
         for: 2m
         labels: { severity: page, team: ai-platform, slo: workflow-availability }
         annotations:
-          summary: ScanReplay is rapidly consuming its 99 percent availability budget
+          summary: SpanReplay is rapidly consuming its 99 percent availability budget
           runbook: docs/incidents/provider-timeout-demo.md
-      - alert: ScanReplayRetrievalLoadShedding
-        expr: sum(rate(scanreplay_ai_retrieval_admissions_total{admission_outcome="shed"}[5m])) > 0.1
+      - alert: SpanReplayRetrievalLoadShedding
+        expr: sum(rate(spanreplay_ai_retrieval_admissions_total{admission_outcome="shed"}[5m])) > 0.1
         for: 5m
         labels: { severity: ticket, team: ai-platform }
         annotations:
           summary: Retrieval is shedding work above its safe concurrency boundary
           runbook: docs/performance-investigation.md
-      - alert: ScanReplayCollectorQueueNearCapacity
+      - alert: SpanReplayCollectorQueueNearCapacity
         expr: max(otelcol_exporter_queue_size / clamp_min(otelcol_exporter_queue_capacity, 1)) > 0.8
         for: 2m
         labels: { severity: page, team: observability }

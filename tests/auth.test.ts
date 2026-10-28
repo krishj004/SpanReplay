@@ -11,9 +11,9 @@ describe("OIDC authorization contract", () => {
       {
         sub: "auth0|operator-1",
         org_id: "org_alpha",
-        "https://scanreplay.example.com/roles": ["operator", "unknown"],
+        "https://spanreplay.example.com/roles": ["operator", "unknown"],
       },
-      "https://scanreplay.example.com/roles",
+      "https://spanreplay.example.com/roles",
       "org_id",
     );
 
@@ -26,7 +26,7 @@ describe("OIDC authorization contract", () => {
   it("rejects tokens without the configured tenant boundary", () => {
     expect(() => principalFromClaims(
       { sub: "auth0|user" },
-      "https://scanreplay.example.com/roles",
+      "https://spanreplay.example.com/roles",
       "org_id",
     )).toThrow("tenant claim");
   });
@@ -44,16 +44,16 @@ describe("OIDC authorization contract", () => {
     const issuer = "https://tenant.example.auth0.com/";
     const verifier = createOidcTokenVerifier({
       issuer,
-      audience: "https://scanreplay-api",
+      audience: "https://spanreplay-api",
       keyResolver: createLocalJWKSet({ keys: [publicJwk] }),
     });
     const token = await new SignJWT({
       org_id: "org_verified",
-      "https://scanreplay.example.com/roles": ["admin"],
+      "https://spanreplay.example.com/roles": ["admin"],
     })
       .setProtectedHeader({ alg: "RS256", kid: "test-key" })
       .setIssuer(issuer)
-      .setAudience("https://scanreplay-api")
+      .setAudience("https://spanreplay-api")
       .setSubject("auth0|verified-user")
       .setIssuedAt()
       .setExpirationTime("5m")

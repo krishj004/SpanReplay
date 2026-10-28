@@ -19,9 +19,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - image: ghcr.io/krishj004/scanreplay
+          - image: ghcr.io/krishj004/spanreplay
             dockerfile: Dockerfile
-          - image: ghcr.io/krishj004/scanreplay-console
+          - image: ghcr.io/krishj004/spanreplay-console
             dockerfile: Dockerfile.console
     steps:
       - uses: actions/checkout@v4

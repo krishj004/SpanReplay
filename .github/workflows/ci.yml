@@ -54,8 +54,8 @@ jobs:
         run: docker compose config --quiet
       - name: Build application images
         run: |
-          docker build --tag scanreplay:ci .
-          docker build --file Dockerfile.console --tag scanreplay-console:ci .
+          docker build --tag spanreplay:ci .
+          docker build --file Dockerfile.console --tag spanreplay-console:ci .
       - name: Start application and observability stack
         run: docker compose up --detach --build
       - name: Exercise workflow and replay APIs
@@ -68,8 +68,8 @@ jobs:
           curl --fail http://localhost:4000/api/workflows \
             --header 'content-type: application/json' \
             --data '{"question":"How should we respond to a provider timeout?","scenario":"healthy"}' \
-            --output /tmp/scanreplay-workflow.json
-          node --input-type=module --eval "const r=JSON.parse(await (await import('node:fs/promises')).readFile('/tmp/scanreplay-workflow.json')); if(r.status!=='completed'||!/^[a-f0-9]{32}$/.test(r.traceId)) process.exit(1); console.log(r.traceId)"
+            --output /tmp/spanreplay-workflow.json
+          node --input-type=module --eval "const r=JSON.parse(await (await import('node:fs/promises')).readFile('/tmp/spanreplay-workflow.json')); if(r.status!=='completed'||!/^[a-f0-9]{32}$/.test(r.traceId)) process.exit(1); console.log(r.traceId)"
           curl --fail --retry 10 --retry-delay 1 --retry-connrefused http://localhost:4173/
       - name: Verify trace, metric, and log correlation
         env:
@@ -138,10 +138,10 @@ jobs:
       - name: Render production overlay
         run: |
           cp infrastructure/kubernetes/overlays/production/production.env.example infrastructure/kubernetes/overlays/production/production.env
-          kubectl kustomize infrastructure/kubernetes/overlays/production > /tmp/scanreplay-production.yaml
+          kubectl kustomize infrastructure/kubernetes/overlays/production > /tmp/spanreplay-production.yaml
       - name: Reject unresolved YAML structure
         run: |
-          test -s /tmp/scanreplay-production.yaml
-          grep -q 'kind: HorizontalPodAutoscaler' /tmp/scanreplay-production.yaml
-          grep -q 'kind: PodDisruptionBudget' /tmp/scanreplay-production.yaml
-          grep -q 'REPLAY_STORE_BACKEND' /tmp/scanreplay-production.yaml
+          test -s /tmp/spanreplay-production.yaml
+          grep -q 'kind: HorizontalPodAutoscaler' /tmp/spanreplay-production.yaml
+          grep -q 'kind: PodDisruptionBudget' /tmp/spanreplay-production.yaml
+          grep -q 'REPLAY_STORE_BACKEND' /tmp/spanreplay-production.yaml

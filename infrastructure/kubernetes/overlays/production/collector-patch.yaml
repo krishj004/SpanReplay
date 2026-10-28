@@ -1,6 +1,6 @@
 apiVersion: v1
 kind: ConfigMap
-metadata: { name: otel-collector-config, namespace: scanreplay }
+metadata: { name: otel-collector-config, namespace: spanreplay }
 data:
   config.yaml: |
     extensions:
@@ -18,7 +18,7 @@ data:
       memory_limiter: { check_interval: 1s, limit_mib: 384, spike_limit_mib: 96 }
       resource:
         attributes:
-          - { key: platform, value: scanreplay, action: upsert }
+          - { key: platform, value: spanreplay, action: upsert }
       batch: { send_batch_size: 512, timeout: 2s }
     exporters:
       otlphttp/backend:
@@ -33,7 +33,7 @@ data:
           initial_interval: 1s
           max_interval: 30s
           max_elapsed_time: 10m
-      prometheus: { endpoint: 0.0.0.0:8889, namespace: scanreplay }
+      prometheus: { endpoint: 0.0.0.0:8889, namespace: spanreplay }
     service:
       extensions: [health_check, file_storage]
       telemetry:
@@ -59,7 +59,7 @@ data:
 ---
 apiVersion: apps/v1
 kind: Deployment
-metadata: { name: otel-collector, namespace: scanreplay }
+metadata: { name: otel-collector, namespace: spanreplay }
 spec:
   replicas: 2
   strategy: { type: RollingUpdate, rollingUpdate: { maxUnavailable: 0, maxSurge: 1 } }
