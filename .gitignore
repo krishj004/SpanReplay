@@ -1,0 +1,15 @@
+node_modules/
+dist/
+packages/*/dist/
+infrastructure/kubernetes/overlays/production/production.env
+console/dist/
+.env
+.env.*
+!.env.example
+data/replays/*.json
+coverage/
+*.log
+.DS_Store
+.terraform/
+*.tfstate
+*.tfstate.*
