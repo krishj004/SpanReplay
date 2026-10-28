@@ -8,11 +8,11 @@
   "author": "Krish Jain <krishj004@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/krishj004/ScanReplay.git"
+    "url": "git+https://github.com/krishj004/SpanReplay.git"
   },
-  "homepage": "https://github.com/krishj004/ScanReplay#readme",
+  "homepage": "https://github.com/krishj004/SpanReplay#readme",
   "bugs": {
-    "url": "https://github.com/krishj004/ScanReplay/issues"
+    "url": "https://github.com/krishj004/SpanReplay/issues"
   },
   "keywords": [
     "opentelemetry",
